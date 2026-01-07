@@ -1,18 +1,28 @@
-DB_NAME="test_database"
-CORS_ORIGINS="*"
-EMERGENT_LLM_KEY=sk-emergent-c5dD9A7B16a1931971
+from fastapi import FastAPI
+from motor.motor_asyncio import AsyncIOMotorClient
+import os
+
+app = FastAPI()
+
+# Pegando as variáveis de ambiente
+MONGO_URI = os.environ.get("MONGO_URI")
+DB_NAME = os.environ.get("DB_NAME")
+
+# Conectando ao MongoDB de forma assíncrona
+client = AsyncIOMotorClient(MONGO_URI)
+db = client[DB_NAME]
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
 
 /app/backend/requirements.txt
 fastapi
 uvicorn[standard]
 motor
 python-dotenv
-pydantic
-python-jose[cryptography]
-passlib[bcrypt]
-bcrypt
-python-multipart
-emergentintegrations
+
+
 
 /app/backend/server.py
 from fastapi import FastAPI, APIRouter, HTTPException, Depends
