@@ -1,4 +1,4 @@
-mongodb+srv://gestor_user:ZWKAfGqhzkg0G1NK@cluster0.wekjhx6.mongodb.net/gestor_db?appName=Cluster0
+
 DB_NAME="test_database"
 CORS_ORIGINS="*"
 EMERGENT_LLM_KEY=sk-emergent-c5dD9A7B16a1931971
