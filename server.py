@@ -1,4 +1,4 @@
-DB_NAME=local
+DB_NAME=locals
 
 from dotenv import load_dotenv
 import os
