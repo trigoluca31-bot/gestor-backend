@@ -16,7 +16,7 @@ db = client[DB_NAME]
 def health_check():
     return {"status": "ok"}
 
-/app/backend/requirements.txt
+
 fastapi
 uvicorn[standard]
 motor
