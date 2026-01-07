@@ -1,4 +1,3 @@
-
 DB_NAME="test_database"
 CORS_ORIGINS="*"
 EMERGENT_LLM_KEY=sk-emergent-c5dD9A7B16a1931971
