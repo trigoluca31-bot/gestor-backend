@@ -1,3 +1,26 @@
+from dotenv import load_dotenv
+import os
+
+# Carrega as variáveis de ambiente
+load_dotenv()
+
+# Pega o nome do banco de dados
+DB_NAME = os.environ.get("DB_NAME")
+
+# Verifica se o nome foi carregado corretamente
+if not DB_NAME:
+    print("Erro: A variável DB_NAME não está configurada!")
+else:
+    print(f"Banco de dados: {DB_NAME}")
+
+# Agora, você pode continuar com a conexão ao banco
+from motor.motor_asyncio import AsyncIOMotorClient
+
+MONGO_URI = os.environ.get("MONGO_URI")
+
+client = AsyncIOMotorClient(MONGO_URI)
+db = client[DB_NAME]
+
 from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
