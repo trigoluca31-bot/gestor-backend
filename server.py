@@ -1,4 +1,4 @@
-DB_NAME=gestor
+DB_NAME=admin
 
 from dotenv import load_dotenv
 import os
