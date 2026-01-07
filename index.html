@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestor de Metas</title>
+  <style>
+    body { font-family: Arial; max-width: 500px; margin: auto; }
+    input, button { width: 100%; margin: 5px 0; padding: 8px; }
+    h2 { margin-top: 30px; }
+    pre { background: #f4f4f4; padding: 10px; }
+  </style>
+</head>
+<body>
+
+<h1>Gestor</h1>
+
+<h2>Cadastro</h2>
+<input id="reg_name" placeholder="Nome">
+<input id="reg_email" placeholder="Email">
+<input id="reg_pass" type="password" placeholder="Senha">
+<button onclick="register()">Cadastrar</button>
+
+<h2>Login</h2>
+<input id="log_email" placeholder="Email">
+<input id="log_pass" type="password" placeholder="Senha">
+<button onclick="login()">Entrar</button>
+
+<h2>Nova Meta</h2>
+<input id="goal_title" placeholder="Título">
+<input id="goal_desc" placeholder="Descrição">
+<input id="goal_date" placeholder="Data alvo (YYYY-MM-DD)">
+<button onclick="createGoal()">Criar Meta</button>
+
+<h2>Minhas Metas</h2>
+<button onclick="loadGoals()">Carregar Metas</button>
+<pre id="goals"></pre>
+
+<script>
+const API = "https://gestor-backend-pb33.onrender.com";
+let token = localStorage.getItem("token");
+
+async function register() {
+  const res = await fetch(API + "/auth/register", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      name: reg_name.value,
+      email: reg_email.value,
+      password: reg_pass.value
+    })
+  });
+  alert("Cadastro feito!");
+}
+
+async function login() {
+  const res = await fetch(API + "/auth/login", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      email: log_email.value,
+      password: log_pass.value
+    })
+  });
+  const data = await res.json();
+  token = data.token;
+  localStorage.setItem("token", token);
+  alert("Login realizado!");
+}
+
+async function createGoal() {
+  const res = await fetch(API + "/goals", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
+    },
+    body: JSON.stringify({
+      title: goal_title.value,
+      description: goal_desc.value,
+      target_date: goal_date.value
+    })
+  });
+  alert("Meta criada!");
+}
+
+async function loadGoals() {
+  const res = await fetch(API + "/goals", {
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  });
+  const data = await res.json();
+  document.getElementById("goals").innerText =
+    JSON.stringify(data, null, 2);
+}
+</script>
+
+</body>
+</html>
