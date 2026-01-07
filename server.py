@@ -1,4 +1,4 @@
-DB_NAME=locals
+DB_NAME=gestor
 
 from dotenv import load_dotenv
 import os
