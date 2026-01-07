@@ -24,7 +24,7 @@ python-dotenv
 
 
 
-/app/backend/server.py
+
 from fastapi import FastAPI, APIRouter, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
