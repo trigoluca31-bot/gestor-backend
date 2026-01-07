@@ -1,3 +1,5 @@
+uvicorn server:app --host 0.0.0.0 --port 10000
+
 DB_NAME=gestor
 
 from dotenv import load_dotenv
