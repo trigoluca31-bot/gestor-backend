@@ -1,3 +1,5 @@
+DB_NAME=local
+
 from dotenv import load_dotenv
 import os
 
